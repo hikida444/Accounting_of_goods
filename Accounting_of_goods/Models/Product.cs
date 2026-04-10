@@ -20,5 +20,13 @@ namespace WinFormsApp1.Models
         public Category Category { get; set; }
 
         public List<Shipment> Shipments { get; set; } = new List<Shipment>();
+
+        public decimal SellingPrice { get; set; }
+        public DateTime? ExpiryDate { get; set; }
+
+
+
+
+
     }
 }
