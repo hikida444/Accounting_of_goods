@@ -154,7 +154,6 @@ namespace WinFormsApp1
 			string brand = txtBrand.Text.Trim();
 			string name = txtName.Text.Trim();
 			string size = cmbSize.Text.Trim();
-			decimal price = numPrice.Value;
 
 			if (string.IsNullOrEmpty(article) || string.IsNullOrEmpty(brand) || string.IsNullOrEmpty(name))
 			{
@@ -174,14 +173,6 @@ namespace WinFormsApp1
 				return;
 			}
 
-			if (price <= 0)
-			{
-				MessageBox.Show("Цена закупки должна быть больше 0!",
-					"Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-				numPrice.Focus(); 
-				return;
-			}
-
 			using (ApplicationDbContext db = new ApplicationDbContext())
 			{
 				if (db.Products.Any(p => p.Article == article))
@@ -196,7 +187,7 @@ namespace WinFormsApp1
 					Brand = brand,
 					Name = name,
 					Size = size,
-					PurchasePrice = price,
+					PurchasePrice = 0,
 					CategoryId = (int)cmbCategory.SelectedValue,
 					CurrentStock = 0
 				};

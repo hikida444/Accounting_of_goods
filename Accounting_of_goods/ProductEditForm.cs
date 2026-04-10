@@ -39,7 +39,6 @@ namespace WinFormsApp1
 					txtArticle.Enabled = false;
 					txtBrand.Text = product.Brand;
 					txtName.Text = product.Name;
-					numPrice.Value = product.PurchasePrice;
 					cmbCategory.SelectedValue = product.CategoryId;
 					LoadSizesByCategory(product.CategoryId, product.Size);
 				}
@@ -199,7 +198,6 @@ namespace WinFormsApp1
 			string brand = txtBrand.Text.Trim();
 			string name = txtName.Text.Trim();
 			string size = cmbSize.Text.Trim();
-			decimal price = numPrice.Value;
 
 			if (string.IsNullOrEmpty(brand) || string.IsNullOrEmpty(name))
 			{
@@ -218,15 +216,6 @@ namespace WinFormsApp1
 				MessageBox.Show("Пожалуйста, выберите категорию!", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				return;
 			}
-
-			if (price <= 0)
-			{
-				MessageBox.Show("Цена закупки должна быть больше 0!",
-					"Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-				numPrice.Focus();
-				return;
-			}
-
 			using (ApplicationDbContext db = new ApplicationDbContext())
 			{
 				var product = db.Products.FirstOrDefault(p => p.Article == _currentArticle);
@@ -235,7 +224,6 @@ namespace WinFormsApp1
 					product.Brand = brand;
 					product.Name = name;
 					product.Size = size;
-					product.PurchasePrice = price;
 					product.CategoryId = (int)cmbCategory.SelectedValue;
 
 					db.SaveChanges();

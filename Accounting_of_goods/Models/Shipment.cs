@@ -18,5 +18,7 @@ namespace WinFormsApp1.Models
         public int ProductId { get; set; }
         public Product Product { get; set; }
         public string Recipient { get; set; }
+
+        public decimal SellingPriceAtShipment { get; set; }
     }
 }
