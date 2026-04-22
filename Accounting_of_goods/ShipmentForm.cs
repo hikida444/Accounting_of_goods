@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using Accounting_of_goods;
+using System.Data;
 using WinFormsApp1.Models;
 
 namespace WinFormsApp1
@@ -30,8 +31,8 @@ namespace WinFormsApp1
                 dgvCart.Columns.Add("ProductName", "Название");
                 dgvCart.Columns.Add("Size", "Размер");
                 dgvCart.Columns.Add("Quantity", "Кол-во");
-                dgvCart.Columns.Add("Price", "Цена продажи");
-                dgvCart.Columns.Add("Sum", "Сумма");
+                dgvCart.Columns.Add("Price", $"Цена ({CurrencyConverter.CurrentCurrency})");
+                dgvCart.Columns.Add("Sum", $"Сумма ({CurrencyConverter.CurrentCurrency})");
                 dgvCart.Columns.Add("Expiry", "Срок акт-сти");
                 dgvCart.Columns["ProductName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 dgvCart.RowHeadersVisible = false;
@@ -109,7 +110,7 @@ namespace WinFormsApp1
                     p.Size,
                     p.CurrentStock,
                     p.Article,
-                    p.SellingPrice,
+                    SellingPrice = CurrencyConverter.ConvertPrice(p.SellingPrice),
                     ExpiryStr = p.ExpiryDate.HasValue ? p.ExpiryDate.Value.ToLocalTime().ToShortDateString() : "-"
                 }).ToList();
 
@@ -338,7 +339,11 @@ namespace WinFormsApp1
                     total += Convert.ToDecimal(row.Cells["Sum"].Value);
                 }
             }
-            if (txtTotalSum != null) txtTotalSum.Text = total.ToString("N2");
+            var sumBox = this.Controls.Find("txtTotalSum", true).FirstOrDefault() as TextBox;
+            if (sumBox != null)
+            {
+                sumBox.Text = $"{total:N2} {CurrencyConverter.CurrentCurrency}";
+            }
         }
 
     }

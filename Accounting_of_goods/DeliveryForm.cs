@@ -20,7 +20,7 @@ namespace Accounting_of_goods
                 dgvPreview.Columns.Add("Name", "Название");
                 dgvPreview.Columns.Add("Size", "Размер");
                 dgvPreview.Columns.Add("Quantity", "Кол-во");
-                dgvPreview.Columns.Add("Price", "Цена закупки");
+                dgvPreview.Columns.Add("Price", $"Цена закупки ({CurrencyConverter.CurrentCurrency})");
                 dgvPreview.Columns.Add("ExpiryDate", "Срок годности");
 
                 DataGridViewButtonColumn deleteCol = new DataGridViewButtonColumn();
@@ -181,6 +181,7 @@ namespace Accounting_of_goods
                         {
                             foreach (var item in importedItems)
                             {
+                                decimal displayPrice = CurrencyConverter.ConvertPrice(item.Price);
                                 dgvPreview.Rows.Add(item.Article, item.Name, item.Size, item.Quantity, item.Price, item.ExpiryDate);
                             }
                             MessageBox.Show("Данные успешно загружены в таблицу.", "Импорт завершен", MessageBoxButtons.OK, MessageBoxIcon.Information);

@@ -81,7 +81,7 @@ namespace WinFormsApp1
                         Название = p.Name,
                         Категория = p.Category != null ? p.Category.Name : "Без категории",
                         Размер = p.Size,
-                        Цена = p.SellingPrice,
+                        Цена = CurrencyConverter.ConvertPrice(p.SellingPrice),
                         Остаток = p.CurrentStock,
                         Срок_Актуальности = p.ExpiryDate.HasValue
                             ? p.ExpiryDate.Value.ToLocalTime().ToShortDateString()
@@ -91,6 +91,11 @@ namespace WinFormsApp1
 
                 dgvProducts.DataSource = products;
                 dgvProducts.RowHeadersVisible = false;
+
+                if (dgvProducts.Columns["Цена"] != null)
+                {
+                    dgvProducts.Columns["Цена"].HeaderText = $"Цена ({CurrencyConverter.CurrentCurrency})";
+                }
 
                 if (dgvProducts.Columns["EditColumn"] == null)
                 {
@@ -241,6 +246,22 @@ namespace WinFormsApp1
         {
             DeliveryForm deliveryForm = new DeliveryForm();
             deliveryForm.ShowDialog();
+            LoadData();
+        }
+
+        private async void cmbCurrency_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string selectedCurrency = cmbCurrency.SelectedItem.ToString();
+            cmbCurrency.Enabled = false;
+            await CurrencyConverter.ChangeCurrencyAsync(selectedCurrency);
+            cmbCurrency.Enabled = true;
+            LoadData();
+        }
+
+        private void btnWriteOff_Click(object sender, EventArgs e)
+        {
+            WriteOffForm writeOffForm = new WriteOffForm();
+            writeOffForm.ShowDialog();
             LoadData();
         }
     }

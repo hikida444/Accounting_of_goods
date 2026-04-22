@@ -39,10 +39,15 @@
             btnShipment = new Button();
             btnHistory = new Button();
             txtSearch = new TextBox();
-            dgvProducts = new DataGridView();
+            dg99 = new DataGridView();
             btnAddProduct = new Button();
             btnSupply = new Button();
+            cmbCurrency = new ComboBox();
+            label2 = new Label();
+            dgvProducts = new DataGridView();
+            btnWriteOff = new Button();
             menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dg99).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvProducts).BeginInit();
             SuspendLayout();
             // 
@@ -108,10 +113,10 @@
             // 
             btnShipment.FlatAppearance.BorderColor = Color.Black;
             btnShipment.Font = new Font("Arial", 11.25F);
-            btnShipment.Location = new Point(577, 64);
+            btnShipment.Location = new Point(577, 66);
             btnShipment.Margin = new Padding(4);
             btnShipment.Name = "btnShipment";
-            btnShipment.Size = new Size(158, 34);
+            btnShipment.Size = new Size(158, 28);
             btnShipment.TabIndex = 3;
             btnShipment.Text = "Оформить отгрузку";
             btnShipment.UseVisualStyleBackColor = true;
@@ -122,10 +127,10 @@
             btnHistory.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnHistory.FlatAppearance.BorderColor = Color.Black;
             btnHistory.Font = new Font("Arial", 11.25F);
-            btnHistory.Location = new Point(743, 98);
+            btnHistory.Location = new Point(743, 104);
             btnHistory.Margin = new Padding(4);
             btnHistory.Name = "btnHistory";
-            btnHistory.Size = new Size(158, 34);
+            btnHistory.Size = new Size(158, 28);
             btnHistory.TabIndex = 4;
             btnHistory.Text = "История отгрузок";
             btnHistory.UseVisualStyleBackColor = true;
@@ -135,21 +140,21 @@
             // 
             txtSearch.BorderStyle = BorderStyle.FixedSingle;
             txtSearch.Font = new Font("Arial", 11.25F);
-            txtSearch.Location = new Point(28, 69);
+            txtSearch.Location = new Point(13, 69);
             txtSearch.Margin = new Padding(4);
             txtSearch.Name = "txtSearch";
-            txtSearch.PlaceholderText = "Поиск по артикулу, бренду или названию";
-            txtSearch.Size = new Size(439, 29);
+            txtSearch.PlaceholderText = "Поиск ";
+            txtSearch.Size = new Size(349, 29);
             txtSearch.TabIndex = 5;
             txtSearch.TextChanged += txtSearch_TextChanged;
             // 
-            // dgvProducts
+            // dg99
             // 
-            dgvProducts.AllowUserToAddRows = false;
-            dgvProducts.AllowUserToDeleteRows = false;
-            dgvProducts.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dgvProducts.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvProducts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dg99.AllowUserToAddRows = false;
+            dg99.AllowUserToDeleteRows = false;
+            dg99.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            dg99.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dg99.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = SystemColors.Window;
             dataGridViewCellStyle1.Font = new Font("Arial", 11.25F, FontStyle.Regular, GraphicsUnit.Point, 204);
@@ -157,26 +162,26 @@
             dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.False;
-            dgvProducts.DefaultCellStyle = dataGridViewCellStyle1;
-            dgvProducts.Location = new Point(0, 172);
-            dgvProducts.Margin = new Padding(4);
-            dgvProducts.Name = "dgvProducts";
-            dgvProducts.ReadOnly = true;
-            dgvProducts.RowHeadersWidth = 82;
-            dgvProducts.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvProducts.Size = new Size(914, 492);
-            dgvProducts.TabIndex = 6;
-            dgvProducts.CellContentClick += dgvProducts_CellContentClick;
+            dg99.DefaultCellStyle = dataGridViewCellStyle1;
+            dg99.Location = new Point(-1691, -325);
+            dg99.Margin = new Padding(4);
+            dg99.Name = "dg99";
+            dg99.ReadOnly = true;
+            dg99.RowHeadersWidth = 82;
+            dg99.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dg99.Size = new Size(914, 492);
+            dg99.TabIndex = 6;
+            dg99.CellContentClick += dgvProducts_CellContentClick;
             // 
             // btnAddProduct
             // 
             btnAddProduct.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnAddProduct.FlatAppearance.BorderColor = Color.Black;
             btnAddProduct.Font = new Font("Arial", 11.25F);
-            btnAddProduct.Location = new Point(743, 54);
+            btnAddProduct.Location = new Point(743, 66);
             btnAddProduct.Margin = new Padding(4);
             btnAddProduct.Name = "btnAddProduct";
-            btnAddProduct.Size = new Size(158, 34);
+            btnAddProduct.Size = new Size(158, 28);
             btnAddProduct.TabIndex = 7;
             btnAddProduct.Text = "Добавить товар";
             btnAddProduct.UseVisualStyleBackColor = true;
@@ -186,23 +191,71 @@
             // 
             btnSupply.FlatAppearance.BorderColor = Color.Black;
             btnSupply.Font = new Font("Arial", 11.25F);
-            btnSupply.Location = new Point(577, 54);
+            btnSupply.Location = new Point(577, 104);
             btnSupply.Margin = new Padding(4);
             btnSupply.Name = "btnSupply";
-            btnSupply.Size = new Size(158, 34);
+            btnSupply.Size = new Size(158, 28);
             btnSupply.TabIndex = 8;
             btnSupply.Text = "Поставки";
             btnSupply.UseVisualStyleBackColor = true;
             btnSupply.Click += btnSupply_Click;
+            // 
+            // cmbCurrency
+            // 
+            cmbCurrency.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbCurrency.FormattingEnabled = true;
+            cmbCurrency.Items.AddRange(new object[] { "RUB", "USD", "EUR" });
+            cmbCurrency.Location = new Point(470, 68);
+            cmbCurrency.Name = "cmbCurrency";
+            cmbCurrency.Size = new Size(70, 28);
+            cmbCurrency.TabIndex = 9;
+            cmbCurrency.SelectedIndexChanged += cmbCurrency_SelectedIndexChanged;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Arial", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            label2.Location = new Point(384, 72);
+            label2.Name = "label2";
+            label2.Size = new Size(80, 21);
+            label2.TabIndex = 10;
+            label2.Text = "Валюта:";
+            // 
+            // dgvProducts
+            // 
+            dgvProducts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvProducts.Location = new Point(13, 156);
+            dgvProducts.Name = "dgvProducts";
+            dgvProducts.RowHeadersWidth = 51;
+            dgvProducts.Size = new Size(888, 432);
+            dgvProducts.TabIndex = 11;
+            dgvProducts.CellContentClick += dgvProducts_CellContentClick;
+            // 
+            // btnWriteOff
+            // 
+            btnWriteOff.FlatAppearance.BorderColor = Color.Black;
+            btnWriteOff.Font = new Font("Arial", 11.25F);
+            btnWriteOff.Location = new Point(577, 13);
+            btnWriteOff.Margin = new Padding(4);
+            btnWriteOff.Name = "btnWriteOff";
+            btnWriteOff.Size = new Size(158, 28);
+            btnWriteOff.TabIndex = 12;
+            btnWriteOff.Text = "Списание";
+            btnWriteOff.UseVisualStyleBackColor = true;
+            btnWriteOff.Click += btnWriteOff_Click;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(914, 600);
+            Controls.Add(btnWriteOff);
+            Controls.Add(dgvProducts);
+            Controls.Add(label2);
+            Controls.Add(cmbCurrency);
             Controls.Add(btnSupply);
             Controls.Add(btnAddProduct);
-            Controls.Add(dgvProducts);
+            Controls.Add(dg99);
             Controls.Add(txtSearch);
             Controls.Add(btnHistory);
             Controls.Add(btnShipment);
@@ -218,6 +271,7 @@
             Load += MainForm_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dg99).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvProducts).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -231,12 +285,16 @@
         private Button btnShipment;
         private Button btnHistory;
         private TextBox txtSearch;
-        private DataGridView dgvProducts;
+        private DataGridView dg99;
         private ToolStripMenuItem сменитьАккаунтToolStripMenuItem;
         private ToolStripMenuItem выходToolStripMenuItem;
         private ToolStripMenuItem btnManageCategories;
         private ToolStripMenuItem категорииToolStripMenuItem1;
         private Button btnAddProduct;
         private Button btnSupply;
+        private ComboBox cmbCurrency;
+        private Label label2;
+        private DataGridView dgvProducts;
+        private Button btnWriteOff;
     }
 }

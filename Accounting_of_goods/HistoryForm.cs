@@ -1,8 +1,9 @@
-﻿using System.Data;
+﻿using Accounting_of_goods;
 using Microsoft.EntityFrameworkCore;
-using WinFormsApp1.Models;
+using System.Data;
 using System.IO;
 using System.Text;
+using WinFormsApp1.Models;
 
 namespace WinFormsApp1
 {
@@ -55,7 +56,11 @@ namespace WinFormsApp1
                     );
                 }
 
-                var history = query
+                var rawHistory = query
+                    .OrderByDescending(s => s.ShipmentDate)
+                    .ToList();
+
+                var history = rawHistory
                     .OrderByDescending(s => s.ShipmentDate)
                     .Select(s => new
                     {
@@ -66,8 +71,8 @@ namespace WinFormsApp1
                         Размер = s.Product.Size,
                         Кол_во = s.Quantity,
                         Получатель = s.Recipient,
-                        Сумма = s.Quantity * s.SellingPriceAtShipment,
-                        Прибыль = (s.SellingPriceAtShipment - s.Product.PurchasePrice) * s.Quantity
+                        Сумма = CurrencyConverter.ConvertPrice(s.Quantity * s.SellingPriceAtShipment),
+                        Прибыль = CurrencyConverter.ConvertPrice((s.SellingPriceAtShipment - s.Product.PurchasePrice) * s.Quantity)
                     })
                     .ToList();
                 dgvHistory.DataSource = null;
@@ -76,13 +81,14 @@ namespace WinFormsApp1
                 dgvHistory.DataSource = history;
 
                 if (dgvHistory.Columns["Кол_во"] != null) dgvHistory.Columns["Кол_во"].HeaderText = "Кол-во";
-                if (dgvHistory.Columns["Сумма"] != null) dgvHistory.Columns["Сумма"].HeaderText = "Сумма отгрузки";
+                if (dgvHistory.Columns["Сумма"] != null) dgvHistory.Columns["Сумма"].HeaderText = $"Сумма ({CurrencyConverter.CurrentCurrency})";
+                if (dgvHistory.Columns["Прибыль"] != null) dgvHistory.Columns["Прибыль"].HeaderText = $"Прибыль ({CurrencyConverter.CurrentCurrency})";
 
                 decimal totalRevenue = history.Sum(h => h.Сумма);
                 decimal totalProfit = history.Sum(h => h.Прибыль);
 
-                lblTotalRevenue.Text = $"{totalRevenue:N2} RUB";
-                lblTotalProfit.Text = $"{totalProfit:N2} RUB";
+                lblTotalRevenue.Text = $"{totalRevenue:N2} {CurrencyConverter.CurrentCurrency}";
+                lblTotalProfit.Text = $"{totalProfit:N2} {CurrencyConverter.CurrentCurrency}";
             }
         }
 
