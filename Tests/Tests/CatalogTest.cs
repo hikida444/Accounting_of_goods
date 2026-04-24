@@ -263,5 +263,48 @@ namespace Accounting_of_goodsTests.Tests
                 Assert.IsNull(deletedProduct);
             }
         }
+
+        [TestMethod]
+        public void CalculateTotalInventoryValue_ShouldReturnCorrectSum()
+        {
+            var options = GetDbOptions();
+            using (var db = new ApplicationDbContext(options))
+            {
+                var product1 = new Product
+                {
+                    Article = "REP-001",
+                    Name = "Куртка зимняя",
+                    Brand = "The North Face",
+                    Size = "M",
+                    CurrentStock = 10,
+                    PurchasePrice = 15000m
+                };
+
+                var product2 = new Product
+                {
+                    Article = "REP-002",
+                    Name = "Кроссовки",
+                    Brand = "Nike",
+                    Size = "42",
+                    CurrentStock = 5,
+                    PurchasePrice = 10000m
+                };
+
+                db.Products.Add(product1);
+                db.Products.Add(product2);
+                db.SaveChanges();
+            }
+
+            decimal totalInventoryValue = 0;
+            using (var db = new ApplicationDbContext(options))
+            {
+                var allProducts = db.Products.ToList();
+                totalInventoryValue = allProducts.Sum(p => p.CurrentStock * p.PurchasePrice);
+            }
+
+            decimal expectedValue = (10 * 15000m) + (5 * 10000m);
+
+            Assert.AreEqual(expectedValue, totalInventoryValue);
+        }
     }
 }

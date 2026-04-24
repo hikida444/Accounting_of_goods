@@ -12,7 +12,6 @@ namespace Accounting_of_goodsTests.Tests
                 .UseInMemoryDatabase(databaseName: Guid.NewGuid().ToString())
                 .Options;
         }
-
         [TestMethod]
         public void AddCategory_DuplicateName_ShouldBlockSaving()
         {
@@ -41,7 +40,6 @@ namespace Accounting_of_goodsTests.Tests
                     isSaved = true;
                 }
             }
-
             Assert.IsFalse(isSaved);
             Assert.AreEqual("Категория с таким названием уже существует", errorMessage);
             using (var db = new ApplicationDbContext(options))
