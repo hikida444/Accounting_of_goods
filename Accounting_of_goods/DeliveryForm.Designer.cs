@@ -42,7 +42,6 @@
             label3 = new Label();
             label4 = new Label();
             label5 = new Label();
-            label6 = new Label();
             btnAddToList = new Button();
             ((System.ComponentModel.ISupportInitialize)numQty).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numPrice).BeginInit();
@@ -51,6 +50,7 @@
             // 
             // cmbProduct
             // 
+            cmbProduct.Anchor = AnchorStyles.Left;
             cmbProduct.FormattingEnabled = true;
             cmbProduct.Location = new Point(136, 112);
             cmbProduct.Margin = new Padding(3, 4, 3, 4);
@@ -61,6 +61,7 @@
             // 
             // cmbSize
             // 
+            cmbSize.Anchor = AnchorStyles.Left;
             cmbSize.FormattingEnabled = true;
             cmbSize.Location = new Point(136, 164);
             cmbSize.Margin = new Padding(3, 4, 3, 4);
@@ -70,6 +71,7 @@
             // 
             // numQty
             // 
+            numQty.Anchor = AnchorStyles.Left;
             numQty.Location = new Point(136, 222);
             numQty.Margin = new Padding(3, 4, 3, 4);
             numQty.Name = "numQty";
@@ -79,14 +81,17 @@
             // 
             // numPrice
             // 
+            numPrice.Anchor = AnchorStyles.Left;
             numPrice.Location = new Point(136, 281);
             numPrice.Margin = new Padding(3, 4, 3, 4);
+            numPrice.Maximum = new decimal(new int[] { 9999999, 0, 0, 0 });
             numPrice.Name = "numPrice";
             numPrice.Size = new Size(153, 27);
             numPrice.TabIndex = 3;
             // 
             // dtpExpiry
             // 
+            dtpExpiry.Anchor = AnchorStyles.Left;
             dtpExpiry.Location = new Point(136, 338);
             dtpExpiry.Margin = new Padding(3, 4, 3, 4);
             dtpExpiry.Name = "dtpExpiry";
@@ -95,6 +100,7 @@
             // 
             // btnImport
             // 
+            btnImport.Anchor = AnchorStyles.Left;
             btnImport.Location = new Point(144, 450);
             btnImport.Margin = new Padding(3, 4, 3, 4);
             btnImport.Name = "btnImport";
@@ -106,7 +112,8 @@
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(664, 538);
+            btnCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnCancel.Location = new Point(1060, 538);
             btnCancel.Margin = new Padding(3, 4, 3, 4);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(86, 35);
@@ -117,7 +124,8 @@
             // 
             // btnConfirmDelivery
             // 
-            btnConfirmDelivery.Location = new Point(756, 538);
+            btnConfirmDelivery.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            btnConfirmDelivery.Location = new Point(1152, 538);
             btnConfirmDelivery.Margin = new Padding(3, 4, 3, 4);
             btnConfirmDelivery.Name = "btnConfirmDelivery";
             btnConfirmDelivery.Size = new Size(131, 35);
@@ -128,17 +136,19 @@
             // 
             // dgvPreview
             // 
+            dgvPreview.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             dgvPreview.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvPreview.Location = new Point(335, 87);
+            dgvPreview.Location = new Point(335, 60);
             dgvPreview.Margin = new Padding(3, 4, 3, 4);
             dgvPreview.Name = "dgvPreview";
             dgvPreview.RowHeadersWidth = 51;
-            dgvPreview.Size = new Size(552, 389);
+            dgvPreview.Size = new Size(948, 416);
             dgvPreview.TabIndex = 9;
             dgvPreview.CellContentClick += dgvPreview_CellContentClick;
             // 
             // label1
             // 
+            label1.Anchor = AnchorStyles.Left;
             label1.AutoSize = true;
             label1.Location = new Point(26, 115);
             label1.Name = "label1";
@@ -149,6 +159,7 @@
             // 
             // label2
             // 
+            label2.Anchor = AnchorStyles.Left;
             label2.AutoSize = true;
             label2.Location = new Point(26, 172);
             label2.Name = "label2";
@@ -158,6 +169,7 @@
             // 
             // label3
             // 
+            label3.Anchor = AnchorStyles.Left;
             label3.AutoSize = true;
             label3.Location = new Point(26, 229);
             label3.Name = "label3";
@@ -167,6 +179,7 @@
             // 
             // label4
             // 
+            label4.Anchor = AnchorStyles.Left;
             label4.AutoSize = true;
             label4.Location = new Point(26, 288);
             label4.Name = "label4";
@@ -176,6 +189,7 @@
             // 
             // label5
             // 
+            label5.Anchor = AnchorStyles.Left;
             label5.AutoSize = true;
             label5.Location = new Point(26, 343);
             label5.Name = "label5";
@@ -183,18 +197,9 @@
             label5.TabIndex = 14;
             label5.Text = "Срок акту-и";
             // 
-            // label6
-            // 
-            label6.AutoSize = true;
-            label6.Location = new Point(486, 43);
-            label6.Name = "label6";
-            label6.Size = new Size(211, 20);
-            label6.TabIndex = 15;
-            label6.Text = "Предварительный просмотр";
-            label6.Click += label6_Click;
-            // 
             // btnAddToList
             // 
+            btnAddToList.Anchor = AnchorStyles.Left;
             btnAddToList.Location = new Point(102, 396);
             btnAddToList.Margin = new Padding(3, 4, 3, 4);
             btnAddToList.Name = "btnAddToList";
@@ -208,9 +213,8 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(914, 600);
+            ClientSize = new Size(1310, 600);
             Controls.Add(btnAddToList);
-            Controls.Add(label6);
             Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(label3);
@@ -252,7 +256,6 @@
         private Label label3;
         private Label label4;
         private Label label5;
-        private Label label6;
         private Button btnAddToList;
     }
 }

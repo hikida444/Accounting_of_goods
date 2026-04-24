@@ -110,6 +110,8 @@ namespace Accounting_of_goods
                             if (product != null)
                             {
                                 product.CurrentStock += qty;
+                                product.SellingPrice = price;
+                                product.ExpiryDate = expiry;
                             }
                             else
                             {
@@ -146,6 +148,11 @@ namespace Accounting_of_goods
                 return;
             }
 
+            if (dtpExpiry.Value.Date < DateTime.Today)
+            {
+                MessageBox.Show("Нельзя добавить товар с истекшим сроком годности!", "Ошибка валидации", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             string article = cmbSize.SelectedValue.ToString();
             string name = cmbProduct.Text;
             string size = cmbSize.Text;

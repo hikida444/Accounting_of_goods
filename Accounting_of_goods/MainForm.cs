@@ -12,9 +12,13 @@ namespace WinFormsApp1
         {
             InitializeComponent();
             _loggedInUser = user;
+            this.FormClosed += MainForm_FormClosed;
         }
 
-
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
         private void MainForm_Load(object sender, EventArgs e)
         {
             if (_loggedInUser == null) return;
@@ -251,11 +255,28 @@ namespace WinFormsApp1
 
         private async void cmbCurrency_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cmbCurrency.SelectedItem == null) return;
+
             string selectedCurrency = cmbCurrency.SelectedItem.ToString();
-            cmbCurrency.Enabled = false;
-            await CurrencyConverter.ChangeCurrencyAsync(selectedCurrency);
-            cmbCurrency.Enabled = true;
-            LoadData();
+
+            try
+            {
+                cmbCurrency.Enabled = false;
+
+                await CurrencyConverter.ChangeCurrencyAsync(selectedCurrency);
+                LoadData();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Не удалось сменить валюту. Ошибка: {ex.Message}",
+                                "Ошибка конвертации",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+            }
+            finally
+            {
+                cmbCurrency.Enabled = true;
+            }
         }
 
         private void btnWriteOff_Click(object sender, EventArgs e)

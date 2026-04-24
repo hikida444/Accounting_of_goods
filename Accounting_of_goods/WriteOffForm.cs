@@ -40,9 +40,10 @@ namespace Accounting_of_goods
         {
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                DateTime today = DateTime.Today.ToUniversalTime();
+                DateTime currentUtc = DateTime.UtcNow;
+
                 var expiredProducts = db.Products
-                    .Where(p => p.ExpiryDate != null && p.ExpiryDate < today && p.CurrentStock > 0)
+                    .Where(p => p.ExpiryDate != null && p.ExpiryDate <= currentUtc && p.CurrentStock > 0)
                     .ToList();
 
                 dgvWriteOff.Rows.Clear();
@@ -66,7 +67,7 @@ namespace Accounting_of_goods
 
                 if (dgvWriteOff.Rows.Count == 0)
                 {
-                    MessageBox.Show("Отличные новости! Просроченных товаров на складе нет.", "Всё чисто", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Просроченных товаров на складе нет.", "Всё чисто", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     btnConfirm.Enabled = false;
                 }
             }
