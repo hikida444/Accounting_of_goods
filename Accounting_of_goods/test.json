@@ -1,18 +1,11 @@
 [
   {
-    "Article": "ITM-001",
-    "Name": "Футболка базовая",
+    "Article": "HM-003",
+    "Name": "Худи оверсайз",
     "Size": "M",
     "Quantity": 50,
-    "Price": 1200.50,
+    "PurchasePrice": 600.00,
+    "SellingPrice": 1200.50,
     "ExpiryDate": "15.12.2028"
-  },
-  {
-    "Article": "ITM-002",
-    "Name": "Джинсы Denim",
-    "Size": "42",
-    "Quantity": 30,
-    "Price": 2500.00,
-    "ExpiryDate": "01.01.2030"
   }
 ]

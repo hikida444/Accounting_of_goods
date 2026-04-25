@@ -16,6 +16,7 @@ namespace Accounting_of_goods
         public WriteOffForm()
         {
             InitializeComponent();
+            this.Load += WriteOffForm_Load;
         }
 
         private void WriteOffForm_Load(object sender, EventArgs e)
@@ -40,10 +41,14 @@ namespace Accounting_of_goods
         {
             using (ApplicationDbContext db = new ApplicationDbContext())
             {
-                DateTime currentUtc = DateTime.UtcNow;
+                var allInStock = db.Products
+                    .Where(p => p.CurrentStock > 0)
+                    .ToList(); 
+                DateTime today = DateTime.Today;
 
-                var expiredProducts = db.Products
-                    .Where(p => p.ExpiryDate != null && p.ExpiryDate <= currentUtc && p.CurrentStock > 0)
+                var expiredProducts = allInStock
+                    .Where(p => p.ExpiryDate.HasValue &&
+                                p.ExpiryDate.Value.ToLocalTime().Date <= today) 
                     .ToList();
 
                 dgvWriteOff.Rows.Clear();
@@ -58,7 +63,7 @@ namespace Accounting_of_goods
                         p.Name,
                         p.Size,
                         p.CurrentStock,
-                        p.ExpiryDate.Value.ToLocalTime().ToShortDateString(),
+                        p.ExpiryDate.Value.ToLocalTime().ToShortDateString(), // Показываем как на главной
                         displayLoss
                     );
                 }
@@ -69,6 +74,10 @@ namespace Accounting_of_goods
                 {
                     MessageBox.Show("Просроченных товаров на складе нет.", "Всё чисто", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     btnConfirm.Enabled = false;
+                }
+                else
+                {
+                    btnConfirm.Enabled = true;
                 }
             }
         }
@@ -119,9 +128,14 @@ namespace Accounting_of_goods
                     db.SaveChanges();
 
                     MessageBox.Show("Просроченные товары успешно списаны со склада!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    this.Close(); 
+                    this.Close();
                 }
             }
+        }
+
+        private void dgvWriteOff_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

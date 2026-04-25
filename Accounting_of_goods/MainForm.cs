@@ -285,5 +285,11 @@ namespace WinFormsApp1
             writeOffForm.ShowDialog();
             LoadData();
         }
+
+        private void категорииToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            dgvCategories categoryForm = new dgvCategories();
+            categoryForm.ShowDialog();
+        }
     }
 }

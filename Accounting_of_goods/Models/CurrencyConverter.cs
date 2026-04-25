@@ -9,14 +9,11 @@ namespace Accounting_of_goods
 {
     public static class CurrencyConverter
     {
-        // Базовая валюта по умолчанию
         public static string CurrentCurrency { get; private set; } = "RUB";
-        // Текущий множитель курса (для рублей он всегда 1)
         public static decimal CurrentRate { get; private set; } = 1m;
 
         private static readonly HttpClient client = new HttpClient();
 
-        // Метод для обновления курса
         public static async Task ChangeCurrencyAsync(string targetCurrency)
         {
             if (targetCurrency == "RUB")
@@ -28,13 +25,13 @@ namespace Accounting_of_goods
 
             try
             {
-                // Бесплатный API без ключа. Базовая валюта - RUB
+             
                 string url = "https://open.er-api.com/v6/latest/RUB";
                 string response = await client.GetStringAsync(url);
 
                 using (JsonDocument doc = JsonDocument.Parse(response))
                 {
-                    // Достаем множитель для выбранной валюты (например, USD)
+                    
                     JsonElement rates = doc.RootElement.GetProperty("rates");
                     if (rates.TryGetProperty(targetCurrency, out JsonElement rateElement))
                     {
@@ -45,7 +42,7 @@ namespace Accounting_of_goods
             }
             catch (Exception ex)
             {
-                // Если нет интернета или API упал - просто выводим ошибку и оставляем рубли
+              
                 System.Windows.Forms.MessageBox.Show($"Ошибка загрузки курса: {ex.Message}", "Ошибка",
                     System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
                 CurrentCurrency = "RUB";
@@ -53,8 +50,6 @@ namespace Accounting_of_goods
             }
         }
 
-        // Удобный метод, который мы будем вызывать везде для перевода цены
-        // Он берет рубли из БД и умножает на текущий курс
         public static decimal ConvertPrice(decimal priceInRub)
         {
             return Math.Round(priceInRub * CurrentRate, 2);

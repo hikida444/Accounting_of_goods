@@ -34,6 +34,7 @@
             файлToolStripMenuItem = new ToolStripMenuItem();
             сменитьАккаунтToolStripMenuItem = new ToolStripMenuItem();
             выходToolStripMenuItem = new ToolStripMenuItem();
+            категорииToolStripMenuItem = new ToolStripMenuItem();
             btnManageCategories = new ToolStripMenuItem();
             категорииToolStripMenuItem1 = new ToolStripMenuItem();
             btnShipment = new Button();
@@ -76,7 +77,7 @@
             // 
             // файлToolStripMenuItem
             // 
-            файлToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { сменитьАккаунтToolStripMenuItem, выходToolStripMenuItem });
+            файлToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { сменитьАккаунтToolStripMenuItem, выходToolStripMenuItem, категорииToolStripMenuItem });
             файлToolStripMenuItem.Name = "файлToolStripMenuItem";
             файлToolStripMenuItem.Size = new Size(59, 24);
             файлToolStripMenuItem.Text = "Файл";
@@ -94,6 +95,13 @@
             выходToolStripMenuItem.Size = new Size(208, 26);
             выходToolStripMenuItem.Text = "Выход";
             выходToolStripMenuItem.Click += выходToolStripMenuItem_Click;
+            // 
+            // категорииToolStripMenuItem
+            // 
+            категорииToolStripMenuItem.Name = "категорииToolStripMenuItem";
+            категорииToolStripMenuItem.Size = new Size(208, 26);
+            категорииToolStripMenuItem.Text = "Категории";
+            категорииToolStripMenuItem.Click += категорииToolStripMenuItem_Click;
             // 
             // btnManageCategories
             // 
@@ -113,7 +121,7 @@
             // 
             btnShipment.FlatAppearance.BorderColor = Color.Black;
             btnShipment.Font = new Font("Arial", 11.25F);
-            btnShipment.Location = new Point(815, 62);
+            btnShipment.Location = new Point(815, 61);
             btnShipment.Margin = new Padding(4);
             btnShipment.Name = "btnShipment";
             btnShipment.Size = new Size(158, 28);
@@ -178,7 +186,7 @@
             btnAddProduct.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             btnAddProduct.FlatAppearance.BorderColor = Color.Black;
             btnAddProduct.Font = new Font("Arial", 11.25F);
-            btnAddProduct.Location = new Point(981, 63);
+            btnAddProduct.Location = new Point(815, 62);
             btnAddProduct.Margin = new Padding(4);
             btnAddProduct.Name = "btnAddProduct";
             btnAddProduct.Size = new Size(158, 28);
@@ -223,10 +231,11 @@
             // 
             // dgvProducts
             // 
-            dgvProducts.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgvProducts.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvProducts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvProducts.Location = new Point(13, 156);
             dgvProducts.Name = "dgvProducts";
+            dgvProducts.ReadOnly = true;
             dgvProducts.RowHeadersWidth = 51;
             dgvProducts.Size = new Size(1126, 432);
             dgvProducts.TabIndex = 11;
@@ -236,7 +245,7 @@
             // 
             btnWriteOff.FlatAppearance.BorderColor = Color.Black;
             btnWriteOff.Font = new Font("Arial", 11.25F);
-            btnWriteOff.Location = new Point(815, 61);
+            btnWriteOff.Location = new Point(981, 63);
             btnWriteOff.Margin = new Padding(4);
             btnWriteOff.Name = "btnWriteOff";
             btnWriteOff.Size = new Size(158, 28);
@@ -297,5 +306,6 @@
         private Label label2;
         private DataGridView dgvProducts;
         private Button btnWriteOff;
+        private ToolStripMenuItem категорииToolStripMenuItem;
     }
 }

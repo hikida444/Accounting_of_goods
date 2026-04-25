@@ -46,6 +46,7 @@
             dgvWriteOff.RowHeadersWidth = 51;
             dgvWriteOff.Size = new Size(799, 373);
             dgvWriteOff.TabIndex = 0;
+            dgvWriteOff.CellContentClick += dgvWriteOff_CellContentClick;
             // 
             // btnCancel
             // 
@@ -66,7 +67,7 @@
             txtTotalLoss.Location = new Point(449, 578);
             txtTotalLoss.Name = "txtTotalLoss";
             txtTotalLoss.ReadOnly = true;
-            txtTotalLoss.Size = new Size(125, 28);
+            txtTotalLoss.Size = new Size(143, 28);
             txtTotalLoss.TabIndex = 2;
             // 
             // btnConfirm
