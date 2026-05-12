@@ -43,19 +43,15 @@
             label4 = new Label();
             label5 = new Label();
             btnAddToList = new Button();
-            numSellingPrice = new NumericUpDown();
-            мвм = new Label();
             ((System.ComponentModel.ISupportInitialize)numQty).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numPrice).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvPreview).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numSellingPrice).BeginInit();
             SuspendLayout();
             // 
             // cmbProduct
             // 
-            cmbProduct.Anchor = AnchorStyles.Left;
             cmbProduct.FormattingEnabled = true;
-            cmbProduct.Location = new Point(136, 60);
+            cmbProduct.Location = new Point(136, 112);
             cmbProduct.Margin = new Padding(3, 4, 3, 4);
             cmbProduct.Name = "cmbProduct";
             cmbProduct.Size = new Size(152, 28);
@@ -64,9 +60,8 @@
             // 
             // cmbSize
             // 
-            cmbSize.Anchor = AnchorStyles.Left;
             cmbSize.FormattingEnabled = true;
-            cmbSize.Location = new Point(136, 112);
+            cmbSize.Location = new Point(136, 164);
             cmbSize.Margin = new Padding(3, 4, 3, 4);
             cmbSize.Name = "cmbSize";
             cmbSize.Size = new Size(152, 28);
@@ -74,8 +69,7 @@
             // 
             // numQty
             // 
-            numQty.Anchor = AnchorStyles.Left;
-            numQty.Location = new Point(136, 170);
+            numQty.Location = new Point(136, 222);
             numQty.Margin = new Padding(3, 4, 3, 4);
             numQty.Name = "numQty";
             numQty.Size = new Size(152, 27);
@@ -84,18 +78,15 @@
             // 
             // numPrice
             // 
-            numPrice.Anchor = AnchorStyles.Left;
-            numPrice.Location = new Point(136, 229);
+            numPrice.Location = new Point(136, 281);
             numPrice.Margin = new Padding(3, 4, 3, 4);
-            numPrice.Maximum = new decimal(new int[] { 9999999, 0, 0, 0 });
             numPrice.Name = "numPrice";
             numPrice.Size = new Size(153, 27);
             numPrice.TabIndex = 3;
             // 
             // dtpExpiry
             // 
-            dtpExpiry.Anchor = AnchorStyles.Left;
-            dtpExpiry.Location = new Point(136, 351);
+            dtpExpiry.Location = new Point(136, 338);
             dtpExpiry.Margin = new Padding(3, 4, 3, 4);
             dtpExpiry.Name = "dtpExpiry";
             dtpExpiry.Size = new Size(152, 27);
@@ -103,8 +94,7 @@
             // 
             // btnImport
             // 
-            btnImport.Anchor = AnchorStyles.Left;
-            btnImport.Location = new Point(144, 463);
+            btnImport.Location = new Point(144, 450);
             btnImport.Margin = new Padding(3, 4, 3, 4);
             btnImport.Name = "btnImport";
             btnImport.Size = new Size(144, 35);
@@ -115,8 +105,7 @@
             // 
             // btnCancel
             // 
-            btnCancel.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnCancel.Location = new Point(1060, 538);
+            btnCancel.Location = new Point(863, 552);
             btnCancel.Margin = new Padding(3, 4, 3, 4);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(86, 35);
@@ -127,8 +116,7 @@
             // 
             // btnConfirmDelivery
             // 
-            btnConfirmDelivery.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            btnConfirmDelivery.Location = new Point(1152, 538);
+            btnConfirmDelivery.Location = new Point(955, 552);
             btnConfirmDelivery.Margin = new Padding(3, 4, 3, 4);
             btnConfirmDelivery.Name = "btnConfirmDelivery";
             btnConfirmDelivery.Size = new Size(131, 35);
@@ -139,21 +127,19 @@
             // 
             // dgvPreview
             // 
-            dgvPreview.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             dgvPreview.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvPreview.Location = new Point(335, 60);
+            dgvPreview.Location = new Point(335, 87);
             dgvPreview.Margin = new Padding(3, 4, 3, 4);
             dgvPreview.Name = "dgvPreview";
             dgvPreview.RowHeadersWidth = 51;
-            dgvPreview.Size = new Size(948, 416);
+            dgvPreview.Size = new Size(760, 389);
             dgvPreview.TabIndex = 9;
             dgvPreview.CellContentClick += dgvPreview_CellContentClick;
             // 
             // label1
             // 
-            label1.Anchor = AnchorStyles.Left;
             label1.AutoSize = true;
-            label1.Location = new Point(26, 63);
+            label1.Location = new Point(26, 115);
             label1.Name = "label1";
             label1.Size = new Size(51, 20);
             label1.TabIndex = 10;
@@ -162,9 +148,8 @@
             // 
             // label2
             // 
-            label2.Anchor = AnchorStyles.Left;
             label2.AutoSize = true;
-            label2.Location = new Point(26, 120);
+            label2.Location = new Point(26, 172);
             label2.Name = "label2";
             label2.Size = new Size(60, 20);
             label2.TabIndex = 11;
@@ -172,9 +157,8 @@
             // 
             // label3
             // 
-            label3.Anchor = AnchorStyles.Left;
             label3.AutoSize = true;
-            label3.Location = new Point(26, 177);
+            label3.Location = new Point(26, 229);
             label3.Name = "label3";
             label3.Size = new Size(58, 20);
             label3.TabIndex = 12;
@@ -182,9 +166,8 @@
             // 
             // label4
             // 
-            label4.Anchor = AnchorStyles.Left;
             label4.AutoSize = true;
-            label4.Location = new Point(26, 236);
+            label4.Location = new Point(26, 288);
             label4.Name = "label4";
             label4.Size = new Size(103, 20);
             label4.TabIndex = 13;
@@ -192,9 +175,8 @@
             // 
             // label5
             // 
-            label5.Anchor = AnchorStyles.Left;
             label5.AutoSize = true;
-            label5.Location = new Point(26, 356);
+            label5.Location = new Point(26, 343);
             label5.Name = "label5";
             label5.Size = new Size(90, 20);
             label5.TabIndex = 14;
@@ -202,8 +184,7 @@
             // 
             // btnAddToList
             // 
-            btnAddToList.Anchor = AnchorStyles.Left;
-            btnAddToList.Location = new Point(102, 409);
+            btnAddToList.Location = new Point(102, 396);
             btnAddToList.Margin = new Padding(3, 4, 3, 4);
             btnAddToList.Name = "btnAddToList";
             btnAddToList.Size = new Size(187, 35);
@@ -212,31 +193,11 @@
             btnAddToList.UseVisualStyleBackColor = true;
             btnAddToList.Click += btnAddToList_Click;
             // 
-            // numSellingPrice
-            // 
-            numSellingPrice.Location = new Point(136, 287);
-            numSellingPrice.Maximum = new decimal(new int[] { 99999, 0, 0, 0 });
-            numSellingPrice.Name = "numSellingPrice";
-            numSellingPrice.Size = new Size(153, 27);
-            numSellingPrice.TabIndex = 17;
-            // 
-            // мвм
-            // 
-            мвм.Anchor = AnchorStyles.Left;
-            мвм.AutoSize = true;
-            мвм.Location = new Point(17, 294);
-            мвм.Name = "мвм";
-            мвм.Size = new Size(112, 20);
-            мвм.TabIndex = 18;
-            мвм.Text = "Цена продажи";
-            // 
             // DeliveryForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1310, 600);
-            Controls.Add(мвм);
-            Controls.Add(numSellingPrice);
+            ClientSize = new Size(1107, 600);
             Controls.Add(btnAddToList);
             Controls.Add(label5);
             Controls.Add(label4);
@@ -259,7 +220,6 @@
             ((System.ComponentModel.ISupportInitialize)numQty).EndInit();
             ((System.ComponentModel.ISupportInitialize)numPrice).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvPreview).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numSellingPrice).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -281,7 +241,5 @@
         private Label label4;
         private Label label5;
         private Button btnAddToList;
-        private NumericUpDown numSellingPrice;
-        private Label мвм;
     }
 }

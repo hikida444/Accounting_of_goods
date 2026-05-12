@@ -1,7 +1,8 @@
 ﻿
+using Accounting_of_goods.Models;
 using System.Data;
-using WinFormsApp1.Models;      
 using System.Text.Json;
+using WinFormsApp1.Models;      
 
 namespace Accounting_of_goods
 {
@@ -20,8 +21,7 @@ namespace Accounting_of_goods
                 dgvPreview.Columns.Add("Name", "Название");
                 dgvPreview.Columns.Add("Size", "Размер");
                 dgvPreview.Columns.Add("Quantity", "Кол-во");
-                dgvPreview.Columns.Add("PurchasePrice", $"Цена закупки ({CurrencyConverter.CurrentCurrency})");
-                dgvPreview.Columns.Add("SellingPrice", $"Цена продажи ({CurrencyConverter.CurrentCurrency})");
+                dgvPreview.Columns.Add("Price", $"Цена закупки ({CurrencyConverter.CurrentCurrency})");
                 dgvPreview.Columns.Add("ExpiryDate", "Срок годности");
 
                 DataGridViewButtonColumn deleteCol = new DataGridViewButtonColumn();
@@ -103,19 +103,26 @@ namespace Accounting_of_goods
                         {
                             string article = row.Cells["Article"].Value.ToString();
                             int qty = Convert.ToInt32(row.Cells["Quantity"].Value);
-                            decimal purchasePrice = Convert.ToDecimal(row.Cells["PurchasePrice"].Value);
-                            decimal sellingPrice = Convert.ToDecimal(row.Cells["SellingPrice"].Value);
-
+                            decimal price = Convert.ToDecimal(row.Cells["Price"].Value);
                             DateTime expiry = Convert.ToDateTime(row.Cells["ExpiryDate"].Value).ToUniversalTime();
 
                             var product = db.Products.FirstOrDefault(p => p.Article == article);
 
                             if (product != null)
                             {
+                               
+                                db.Supplies.Add(new Supply
+                                {
+                                    ProductId = product.Id,
+                                    Quantity = qty,
+                                    PurchasePrice = price,
+                                    CurrencyAtSupply = CurrencyConverter.CurrentCurrency,
+                                    RateAtSupply = CurrencyConverter.CurrentRate,
+                                    SupplyDate = DateTime.UtcNow
+                                });
+
                                 product.CurrentStock += qty;
-                                product.PurchasePrice = purchasePrice; 
-                                product.SellingPrice = sellingPrice;  
-                                product.ExpiryDate = expiry;
+                                product.PurchasePrice = price; 
                             }
                             else
                             {
@@ -146,30 +153,22 @@ namespace Accounting_of_goods
                 return;
             }
 
-            if (numQty.Value <= 0 || numPrice.Value <= 0 || numSellingPrice.Value <= 0)
+            if (numQty.Value <= 0 || numPrice.Value <= 0)
             {
-                MessageBox.Show("Количество и цены должны быть больше 0!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Количество и цена должны быть больше 0!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            if (dtpExpiry.Value.Date < DateTime.Today)
-            {
-                MessageBox.Show("Нельзя добавить товар с истекшим сроком годности!", "Ошибка валидации", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
             string article = cmbSize.SelectedValue.ToString();
             string name = cmbProduct.Text;
             string size = cmbSize.Text;
             int qty = (int)numQty.Value;
-            decimal purchasePrice = numPrice.Value;
-            decimal sellingPrice = numSellingPrice.Value;
+            decimal price = numPrice.Value;
             string expiry = dtpExpiry.Value.ToShortDateString();
 
-            dgvPreview.Rows.Add(article, name, size, qty, purchasePrice, sellingPrice, expiry);
-
+            dgvPreview.Rows.Add(article, name, size, qty, price, expiry);
             numQty.Value = 0;
             numPrice.Value = 0;
-            numSellingPrice.Value = 0;
         }
 
         private void dgvPreview_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -196,7 +195,7 @@ namespace Accounting_of_goods
                             foreach (var item in importedItems)
                             {
                                 decimal displayPrice = CurrencyConverter.ConvertPrice(item.Price);
-                                dgvPreview.Rows.Add(item.Article, item.Name, item.Size, item.Quantity, item.PurchasePrice, item.SellingPrice, item.ExpiryDate);
+                                dgvPreview.Rows.Add(item.Article, item.Name, item.Size, item.Quantity, item.Price, item.ExpiryDate);
                             }
                             MessageBox.Show("Данные успешно загружены в таблицу.", "Импорт завершен", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
@@ -224,8 +223,5 @@ namespace Accounting_of_goods
         public int Quantity { get; set; }
         public decimal Price { get; set; }
         public string ExpiryDate { get; set; }
-
-        public decimal PurchasePrice { get; set; } 
-        public decimal SellingPrice { get; set; }
     }
 }

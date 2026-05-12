@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Accounting_of_goods.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace WinFormsApp1.Models
 {
@@ -9,6 +10,8 @@ namespace WinFormsApp1.Models
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Shipment> Shipments { get; set; }
+
+        public DbSet<Supply> Supplies { get; set; }
 
         public ApplicationDbContext()
         {

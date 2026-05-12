@@ -288,7 +288,9 @@ namespace WinFormsApp1
                                     ProductId = product.Id,
                                     UserId = _userId,
                                     Recipient = recipient,
-                                    SellingPriceAtShipment = product.SellingPrice
+                                    SellingPriceAtShipment = product.SellingPrice,
+                                    CurrencyAtShipment = CurrencyConverter.CurrentCurrency,
+                                    RateAtShipment = CurrencyConverter.CurrentRate
                                 };
                                 db.Shipments.Add(newShipment);
                             }

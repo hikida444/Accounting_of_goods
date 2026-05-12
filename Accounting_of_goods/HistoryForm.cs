@@ -71,8 +71,9 @@ namespace WinFormsApp1
                         Размер = s.Product.Size,
                         Кол_во = s.Quantity,
                         Получатель = s.Recipient,
-                        Сумма = CurrencyConverter.ConvertPrice(s.Quantity * s.SellingPriceAtShipment),
-                        Прибыль = CurrencyConverter.ConvertPrice((s.SellingPriceAtShipment - s.Product.PurchasePrice) * s.Quantity)
+                        Сумма = Math.Round(s.SellingPriceAtShipment * s.RateAtShipment * s.Quantity, 2),
+                        Прибыль = Math.Round((s.SellingPriceAtShipment - s.Product.PurchasePrice) * s.Quantity * s.RateAtShipment, 2),
+                        Валюта = s.CurrencyAtShipment
                     })
                     .ToList();
                 dgvHistory.DataSource = null;
